@@ -10,7 +10,7 @@ primary_region = 'gru'
   dockerfile = 'Dockerfile'
 
 [deploy]
-  release_command = 'cd /app && python manage.py migrate'
+  release_command = 'sh -c "python manage.py migrate"'
 
 [env]
   ALLOWED_HOSTS = '*'
