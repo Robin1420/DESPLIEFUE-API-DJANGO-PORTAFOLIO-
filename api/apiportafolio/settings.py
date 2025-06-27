@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',            # Para permitir CORS
     'whitenoise.runserver_nostatic',  # Para servir archivos estáticos
     'portafolio',             # Tu aplicación
+    'django.contrib.sessions',  # Necesario para algunas características de DRF
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,14 @@ WSGI_APPLICATION = 'apiportafolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Desactivar migraciones automáticas
+MIGRATION_MODULES = {
+    'portafolio': None,  # No generar migraciones para la app portafolio
+    'auth': None,        # Desactivar migraciones para auth
+    'contenttypes': None, # Desactivar migraciones para contenttypes
+}
+
+# Configuración de la base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -83,6 +92,12 @@ DATABASES = {
         },
     }
 }
+
+# Desactivar la verificación de tablas al inicio
+SILENCED_SYSTEM_CHECKS = [
+    'models.E028',  # Ignorar advertencias de tablas no creadas
+    'models.W042',  # Ignorar advertencias de AutoField
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

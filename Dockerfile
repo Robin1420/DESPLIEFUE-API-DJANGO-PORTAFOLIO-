@@ -28,4 +28,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Comando para ejecutar la aplicación
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "apiportafolio.wsgi"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "apiportafolio.wsgi"]
