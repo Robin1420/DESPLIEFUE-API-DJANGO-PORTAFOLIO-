@@ -1,0 +1,47 @@
+# fly.toml app configuration file
+# https://fly.io/docs/reference/configuration/
+
+app = "api-django-portafolio"  # Cambia esto a un nombre único para tu aplicación
+primary_region = "gru"  # o la región más cercana a ti
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8000"
+  PYTHONPATH = "/app"
+  DJANGO_SETTINGS_MODULE = "apiportafolio.settings"
+  ALLOWED_HOSTS = "*"
+  DEBUG = "False"
+  # Configura tus variables de entorno aquí
+  # DATABASE_URL = "tu-url-de-base-de-datos"
+
+[deploy]
+  release_command = "cd /app && python manage.py migrate"
+
+[[services]]
+  http_checks = []
+  internal_port = 8000
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = 15
+    restart_limit = 0
+    timeout = 2
