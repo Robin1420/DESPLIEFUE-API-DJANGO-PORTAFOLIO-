@@ -1,5 +1,5 @@
-# Usa la imagen oficial de Python
-FROM python:3.9-slim-buster
+# Usa la imagen oficial de Python 3.10
+FROM python:3.10-slim-buster
 
 # Establece variables de entorno
 ENV PYTHONDONTWRITEBYTECODE 1
