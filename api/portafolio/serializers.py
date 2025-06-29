@@ -28,8 +28,7 @@ class ProyectoSerializer(serializers.ModelSerializer):
         model = Proyectos
         fields = '__all__'
         extra_kwargs = {
-            'id': {'read_only': True},
-            'fecha': {'read_only': True}
+            'id': {'read_only': True}
         }
 
 
